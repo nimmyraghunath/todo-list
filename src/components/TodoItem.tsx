@@ -16,8 +16,9 @@ const TodoItem: React.FC = () => {
 
   useEffect(() => {
     const checkForCompletedTodos = () => {
-      if (!todos) {
+      if (todos?.length<=0) {
         setShowRemoveButton(false);
+        inputRef.current?.focus();
       } else {
         const completedTodos = todos?.filter((todo) => todo.completed);
 
@@ -45,6 +46,7 @@ const TodoItem: React.FC = () => {
     setTodos([...todos, todoObj]);
     setTodo("");
     setError(false);
+    inputRef.current?.focus();
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +56,7 @@ const TodoItem: React.FC = () => {
   const handleRemoveCompletedTasks: () => void = () => {
     const completedTodos = todos.filter((todo) => !todo.completed);
     setTodos(completedTodos);
+    inputRef.current?.focus();
   };
 
   const errorStyle = {
